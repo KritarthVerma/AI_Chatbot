@@ -1,7 +1,8 @@
-import express from 'express';
-const app = express();
-//---------------------------MIDDLEWARES------------------------
-app.use(express.json()); //parses JSON payloads into JavaScript objects, making them accessible via req.body
+import app from './app.js';
+import { connectToDB } from './db/connection.js';
 //-----------------------CONNECTIONS AND LISTENERS-------------------------------
-app.listen(5000, () => { console.log("Server open"); });
+connectToDB().then(() => {
+    app.listen(5000, () => { console.log("Server open and connected to database"); });
+})
+    .catch((err) => console.log(err));
 //# sourceMappingURL=index.js.map
